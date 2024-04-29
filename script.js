@@ -83,18 +83,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to fetch posts data and display in the sidebar
   function fetchPostsData() {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    fetch(
+      "https://beamer-ssr.vercel.app/v1/api/post/read/user/662a076c0e4e0a16410b5b28?page=1&limit=10"
+    )
       .then((response) => response.json())
       .then((data) => {
         // Clear existing sidebar content
         sidebar.innerHTML = "";
         // Iterate through each post and create a div to display title and body
-        data.forEach((post) => {
+        data.data.forEach((post) => {
           const postDiv = document.createElement("div");
           const title = document.createElement("h3");
           title.textContent = post.title;
           const body = document.createElement("p");
-          body.textContent = post.body;
+          body.textContent = post.description;
           postDiv.appendChild(title);
           postDiv.appendChild(body);
           sidebar.appendChild(postDiv);
